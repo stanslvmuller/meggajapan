@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white text-[#212529] font-sans text-[14px] leading-normal antialiased;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  ::selection {
+    background: #f71f2d;
+    color: #fff;
+  }
+
+  input,
+  select,
+  button {
+    font-family: inherit;
+  }
+
+  /* Firefox / WebKit number input spinners look wrong inside the amount field. */
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-3 sm:px-4 lg:px-6;
+  }
+
+  /* Black pill buttons used all over the Meccha Japan store. */
+  .btn-black {
+    @apply inline-flex items-center justify-center rounded-[5px] bg-ink px-4 py-2 text-[12px] font-bold uppercase tracking-wide text-white transition-colors duration-150 hover:bg-[#2b2b2b] active:bg-black;
+  }
+
+  .btn-red {
+    @apply inline-flex items-center justify-center rounded-[5px] bg-red px-4 py-2 text-[12px] font-bold uppercase tracking-wide text-white transition-colors duration-150 hover:bg-red-dark active:bg-[#c9101d];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-[5px] border border-ink bg-white px-4 py-2 text-[12px] font-bold uppercase tracking-wide text-ink transition-colors duration-150 hover:bg-ink hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-[5px] border border-line bg-white px-4 py-2 text-[12px] font-bold uppercase tracking-wide text-ink transition-colors duration-150 hover:border-ink;
+  }
+
+  /* Section heading with the short rule above it, as used on the store. */
+  .section-title {
+    @apply relative inline-block pt-3 text-[20px] font-bold text-[#222] sm:text-[24px];
+  }
+
+  .section-title::before {
+    content: "";
+    @apply absolute left-0 top-0 h-[3px] w-[50px] bg-[#222];
+  }
+
+  .label-cap {
+    @apply text-[11px] font-bold uppercase tracking-[0.08em] text-grey-mid;
+  }
+
+  .link-red {
+    @apply text-[13px] font-bold text-ink transition-colors hover:text-red;
+  }
+}
+
+/* Flip-card tints lifted from the store's promotional cards. */
+.tint-graphite {
+  background: radial-gradient(circle, #575757 0%, #383838 35%, #1d1d1d 100%);
+}
+.tint-silver {
+  background: radial-gradient(circle, #e2e2e2 0%, #d6d6d6 17%, #adadad 70%);
+}
+.tint-aqua {
+  background: radial-gradient(circle, #dffbff 0%, #93f2ff 31%, #00e1ff 70%);
+}
+.tint-blue {
+  background: radial-gradient(circle, #282dc6 0%, #1e23b3 31%, #00046b 100%);
+}
+.tint-coral {
+  background: radial-gradient(circle, #ffa199 0%, #ff7f73 31%, #ff6052 70%);
+}
+.tint-orange {
+  background: radial-gradient(circle, #ffa365 0%, #ff9855 33%, #fe751a 70%);
+}
+.tint-pink {
+  background: radial-gradient(circle, #ffc6f5 0%, #ff90ec 31%, #ff5ce3 70%);
+}
+.tint-yellow {
+  background: radial-gradient(circle, #fff080 0%, #ffef7f 26%, #ffe000 70%);
+}
+.tint-lime {
+  background: radial-gradient(circle, #d8ff84 0%, #d8ff84 31%, #b1ff09 70%);
+}
+.tint-violet {
+  background: radial-gradient(circle, #bc4eff 0%, #b130ff 35%, #a717ff 100%);
+}
+.tint-cream {
+  background: radial-gradient(circle, #ffefe0 0%, #ffe8d3 31%, #ffdab9 100%);
+}
+
+/* Hide the scrollbar on the horizontal rails without losing the scroll. */
+.rail {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
