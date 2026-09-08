@@ -4,7 +4,7 @@ import CommunityGrid from "@/components/CommunityGrid";
 import { searchCommunities } from "@/data/communities";
 
 export const metadata: Metadata = {
-  title: "Search — Meccha Japan Support",
+  title: "Search",
 };
 
 export default async function SearchPage({

@@ -4,7 +4,7 @@ import SectionTitle from "@/components/SectionTitle";
 import { PAYMENT_METHODS } from "@/data/payments";
 
 export const metadata: Metadata = {
-  title: "How It Works — Meccha Japan Support",
+  title: "How It Works",
   description:
     "How fan support works on Meccha Japan Support: choose a community, choose an amount, choose how you pay.",
 };

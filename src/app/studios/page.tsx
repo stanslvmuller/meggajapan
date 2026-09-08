@@ -5,7 +5,7 @@ import { groupLabel } from "@/data/categories";
 import { CATEGORY_LABEL, type CategoryId } from "@/data/communities";
 
 export const metadata: Metadata = {
-  title: "Studios & Communities — Meccha Japan Support",
+  title: "Studios & Communities",
   description:
     "Browse the studios, series, characters and card games you can support.",
 };

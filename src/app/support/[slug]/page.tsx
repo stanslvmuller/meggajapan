@@ -18,9 +18,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const community = getCommunity(slug);
-  if (!community) return { title: "Not found — Meccha Japan Support" };
+  if (!community) return { title: "Not found" };
   return {
-    title: `Support ${community.name} — Meccha Japan Support`,
+    title: `Support ${community.name}`,
     description: `Support the creators behind the world of ${community.name}.`,
   };
 }
