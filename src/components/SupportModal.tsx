@@ -3,7 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import CardForm from "./CardForm";
 import {
+  SUPPORT_ADDRESSES,
   shortenAddress,
   type CryptoCoin,
   type PaymentMethod,
@@ -17,6 +19,7 @@ export default function SupportModal({
   method,
   coin,
   onClose,
+  onChangeMethod,
 }: {
   community: Community;
   amount: number;
@@ -24,10 +27,12 @@ export default function SupportModal({
   /** Only set when the crypto method is selected. */
   coin?: CryptoCoin;
   onClose: () => void;
+  onChangeMethod: () => void;
 }) {
   const [confirmed, setConfirmed] = useState(false);
   const { add } = useSupportHistory();
 
+  const isCard = method.id === "card";
   const isCrypto = method.id === "crypto" && Boolean(coin);
   const methodLabel = isCrypto ? `Crypto — ${coin!.symbol}` : method.label;
   const methodDetail = isCrypto
@@ -48,6 +53,9 @@ export default function SupportModal({
   }, [onClose]);
 
   function confirm() {
+    if (method.externalUrl) {
+      window.open(method.externalUrl, "_blank", "noopener,noreferrer");
+    }
     add({
       slug: community.slug,
       name: community.name,
@@ -68,10 +76,14 @@ export default function SupportModal({
         if (event.target === event.currentTarget) onClose();
       }}
     >
-      <div className="w-full max-w-[440px] overflow-hidden rounded-t-[8px] bg-white shadow-card sm:rounded-[6px]">
+      <div className="max-h-full w-full max-w-[440px] overflow-y-auto rounded-t-[8px] bg-white shadow-card sm:rounded-[6px]">
         <div className="flex items-center justify-between border-b border-line px-5 py-3">
           <h2 className="text-[14px] font-bold uppercase tracking-wide text-ink">
-            {confirmed ? "Support recorded" : "Confirm your support"}
+            {confirmed
+              ? "Support recorded"
+              : isCard
+                ? "Card details"
+                : "Confirm your support"}
           </h2>
           <button
             type="button"
@@ -98,7 +110,9 @@ export default function SupportModal({
               Thank you for supporting {community.name}!
             </p>
             <p className="mx-auto mt-2 max-w-[320px] text-[13px] leading-relaxed text-grey-mid">
-              Your support has been recorded and added to your support history.
+              {method.externalUrl
+                ? `Finish the payment in the ${method.label} window that just opened. Your support has been added to your support history.`
+                : "Your support has been recorded and added to your support history."}
             </p>
 
             <div className="mt-5 flex flex-col gap-2 sm:flex-row">
@@ -124,50 +138,63 @@ export default function SupportModal({
                     className="h-[44px] w-auto object-contain"
                   />
                 </span>
-                <span>
-                  <span className="block text-[15px] font-bold text-ink">
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[15px] font-bold text-ink">
                     {community.name}
                   </span>
-                  <span className="block text-[12px] text-grey-mid">
+                  <span className="block truncate text-[12px] text-grey-mid">
                     {community.creator}
                   </span>
                 </span>
+                <span className="shrink-0 text-[18px] font-bold text-ink">
+                  ${amount}
+                </span>
               </div>
 
-              <dl className="mt-4">
-                <div className="flex items-center justify-between border-b border-line py-2.5">
-                  <dt className="label-cap">Amount</dt>
-                  <dd className="text-[16px] font-bold text-ink">${amount}</dd>
+              {isCard ? (
+                <div className="mt-4">
+                  <CardForm amount={amount} onCancel={onChangeMethod} />
                 </div>
-                <div className="flex items-center justify-between border-b border-line py-2.5">
-                  <dt className="label-cap">Payment method</dt>
-                  <dd className="text-[14px] font-bold text-ink">{methodDetail}</dd>
-                </div>
-                <div className="flex items-center justify-between gap-4 border-b border-line py-2.5 last:border-b-0">
-                  <dt className="label-cap">Destination</dt>
-                  <dd className="truncate text-[13px] font-bold text-ink">
-                    {community.supportId}
-                  </dd>
-                </div>
-                {isCrypto && (
-                  <div className="flex items-center justify-between gap-4 py-2.5">
-                    <dt className="label-cap">{coin!.symbol} address</dt>
-                    <dd className="truncate font-mono text-[13px] font-bold text-ink">
-                      {shortenAddress(community.walletAddresses[coin!.id])}
+              ) : (
+                <dl className="mt-4">
+                  <div className="flex items-center justify-between gap-4 border-b border-line py-2.5">
+                    <dt className="label-cap">Payment method</dt>
+                    <dd className="text-[14px] font-bold text-ink">{methodDetail}</dd>
+                  </div>
+                  <div className="flex items-center justify-between gap-4 border-b border-line py-2.5 last:border-b-0">
+                    <dt className="label-cap">
+                      {method.id === "bank" ? "Reference" : "Destination"}
+                    </dt>
+                    <dd className="truncate text-[13px] font-bold text-ink">
+                      {community.supportId}
                     </dd>
                   </div>
-                )}
-              </dl>
+                  {isCrypto && (
+                    <div className="flex items-center justify-between gap-4 py-2.5">
+                      <dt className="label-cap">{coin!.symbol} address</dt>
+                      <dd className="truncate font-mono text-[13px] font-bold text-ink">
+                        {shortenAddress(SUPPORT_ADDRESSES[coin!.id])}
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+              )}
             </div>
 
-            <div className="border-t border-line bg-panel px-5 py-4">
-              <button type="button" onClick={confirm} className="btn-red w-full py-3.5">
-                Confirm Support
-              </button>
-              <p className="mt-2.5 text-center text-[11px] leading-relaxed text-grey-mid">
-                By confirming you agree to the support policy.
-              </p>
-            </div>
+            {!isCard && (
+              <div className="border-t border-line bg-panel px-5 py-4">
+                <button type="button" onClick={confirm} className="btn-red w-full py-3.5">
+                  {method.externalUrl
+                    ? `Continue to ${method.label}`
+                    : "Confirm Support"}
+                </button>
+                <p className="mt-2.5 text-center text-[11px] leading-relaxed text-grey-mid">
+                  {method.externalUrl
+                    ? `You will be taken to ${method.label} to complete the payment.`
+                    : "By confirming you agree to the support policy."}
+                </p>
+              </div>
+            )}
           </>
         )}
       </div>

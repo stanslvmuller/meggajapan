@@ -55,7 +55,7 @@ export const categoryTiles: CategoryTileDef[] = [
     label: "Publishers",
     note: "Magazines and collected editions",
     href: "/studios?group=publishers",
-    art: "/img/cards/one-piece.png",
+    art: "/img/cards/naruto.png",
     tint: "coral",
   },
   {

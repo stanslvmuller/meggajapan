@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const MONTAGE = [
   { src: "/img/cards/pokemon.png", alt: "Pokémon merchandise", className: "z-30 h-[170px] sm:h-[190px] lg:h-[230px]" },
-  { src: "/img/cards/one-piece.png", alt: "ONE PIECE merchandise", className: "z-20 h-[160px] sm:h-[180px] lg:h-[215px]" },
+  { src: "/img/cards/pokemon-fit.png", alt: "Pokémon Fit plush collection", className: "z-20 h-[160px] sm:h-[180px] lg:h-[215px]" },
   { src: "/img/cards/sanrio.png", alt: "Sanrio plush", className: "z-10 hidden h-[170px] sm:block lg:h-[215px]" },
   { src: "/img/cards/hatsune-miku.png", alt: "Hatsune Miku figures", className: "z-0 hidden h-[165px] lg:block lg:h-[205px]" },
 ];

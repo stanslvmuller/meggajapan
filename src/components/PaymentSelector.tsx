@@ -17,7 +17,12 @@ export default function PaymentSelector({
           <button
             key={method.id}
             type="button"
-            onClick={() => onSelect(method.id)}
+            onClick={() => {
+              onSelect(method.id);
+              if (method.externalUrl) {
+                window.open(method.externalUrl, "_blank", "noopener,noreferrer");
+              }
+            }}
             aria-pressed={active}
             className={`flex h-[46px] items-center gap-2.5 rounded-[5px] border px-3 text-left text-[13px] font-bold transition-colors ${
               active
@@ -33,7 +38,25 @@ export default function PaymentSelector({
             >
               {active && <span className="h-2 w-2 rounded-full bg-ink" />}
             </span>
-            {method.label}
+            <span className="flex-1">{method.label}</span>
+            {method.externalUrl && (
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="shrink-0 text-grey-mid"
+                aria-hidden
+              >
+                <path d="M14 4h6v6" />
+                <path d="M20 4 10 14" />
+                <path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" />
+              </svg>
+            )}
           </button>
         );
       })}

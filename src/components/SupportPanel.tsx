@@ -9,6 +9,7 @@ import PaymentSelector from "./PaymentSelector";
 import {
   CRYPTO_COINS,
   PAYMENT_METHODS,
+  SUPPORT_ADDRESSES,
   shortenAddress,
   type CryptoCoinId,
 } from "@/data/payments";
@@ -112,8 +113,8 @@ export default function SupportPanel({ community }: { community: Community }) {
             <div className="mt-1">
               <CopyField
                 label={`${coin.name} address — ${coin.network}`}
-                value={shortenAddress(community.walletAddresses[coinId])}
-                copyValue={community.walletAddresses[coinId]}
+                value={shortenAddress(SUPPORT_ADDRESSES[coinId])}
+                copyValue={SUPPORT_ADDRESSES[coinId]}
                 mono
               />
             </div>
@@ -164,6 +165,7 @@ export default function SupportPanel({ community }: { community: Community }) {
           method={method}
           coin={methodId === "crypto" ? coin : undefined}
           onClose={() => setOpen(false)}
+          onChangeMethod={() => setOpen(false)}
         />
       )}
     </div>

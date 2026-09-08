@@ -31,8 +31,8 @@ export const RECENT_HISTORY: SupportEntry[] = [
     date: "2026-09-04",
   },
   {
-    slug: "one-piece",
-    name: "ONE PIECE",
+    slug: "pokemon-tcg",
+    name: "Pokémon TCG",
     amount: 50,
     method: "Apple Pay",
     date: "2026-08-29",
