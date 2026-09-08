@@ -38,16 +38,17 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
     externalUrl: "https://www.paypal.com/",
   },
   {
+    id: "revolut",
+    label: "Revolut",
+    detail: "Revolut",
+    note: "Pay with your Revolut balance or card.",
+    externalUrl: "https://www.revolut.com/",
+  },
+  {
     id: "crypto",
     label: "Crypto",
     detail: "Crypto transfer",
     note: "Bitcoin, Ethereum or Solana.",
-  },
-  {
-    id: "bank",
-    label: "Bank Transfer",
-    detail: "Bank transfer",
-    note: "Direct transfer in USD or JPY.",
   },
 ];
 

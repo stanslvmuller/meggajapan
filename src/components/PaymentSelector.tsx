@@ -1,6 +1,7 @@
 "use client";
 
 import { PAYMENT_METHODS } from "@/data/payments";
+import { RevolutMark } from "./BrandMarks";
 
 export default function PaymentSelector({
   selected,
@@ -17,12 +18,7 @@ export default function PaymentSelector({
           <button
             key={method.id}
             type="button"
-            onClick={() => {
-              onSelect(method.id);
-              if (method.externalUrl) {
-                window.open(method.externalUrl, "_blank", "noopener,noreferrer");
-              }
-            }}
+            onClick={() => onSelect(method.id)}
             aria-pressed={active}
             className={`flex h-[46px] items-center gap-2.5 rounded-[5px] border px-3 text-left text-[13px] font-bold transition-colors ${
               active
@@ -39,6 +35,7 @@ export default function PaymentSelector({
               {active && <span className="h-2 w-2 rounded-full bg-ink" />}
             </span>
             <span className="flex-1">{method.label}</span>
+            {method.id === "revolut" && <RevolutMark />}
             {method.externalUrl && (
               <svg
                 width="12"

@@ -31,7 +31,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   },
 ];
 
-const PAYMENTS = ["Visa", "Mastercard", "PayPal", "Apple Pay", "Google Pay"];
+const PAYMENTS = ["Visa", "Mastercard", "Amex", "PayPal", "Apple Pay", "Google Pay", "Revolut"];
 
 export default function Footer() {
   return (

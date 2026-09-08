@@ -162,9 +162,7 @@ export default function SupportModal({
                     <dd className="text-[14px] font-bold text-ink">{methodDetail}</dd>
                   </div>
                   <div className="flex items-center justify-between gap-4 border-b border-line py-2.5 last:border-b-0">
-                    <dt className="label-cap">
-                      {method.id === "bank" ? "Reference" : "Destination"}
-                    </dt>
+                    <dt className="label-cap">Destination</dt>
                     <dd className="truncate text-[13px] font-bold text-ink">
                       {community.supportId}
                     </dd>
